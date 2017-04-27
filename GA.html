@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--JQuery URL: http://code.jquery.com/jquery-latest.min.js-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<style>
+
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  background: url("https://i.imgur.com/F60rCBd.jpg");
+  background-size: cover;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.strip {
+  background: #EEE;
+  box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.2), 0 0px 16px 0 rgba(0, 0, 0, 0.19);
+}
+
+.selector {
+  height: 100px;
+  padding: 1px 0 20px 0;
+  background: rgba(0,0,0,0.75);
+}
+
+i {
+  color: #E5E5E5;
+}
+
+h1 {
+  font-family: 'Boogaloo', cursive;
+  font-size: 72px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0;
+
+}
+
+h2 {
+  font-family: 'Boogaloo', cursive;
+  font-size: 36px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 0;
+  color: #626666;
+  font-weight: 400;
+}
+
+.item {
+  background: #EEE;
+  display: inline-block;
+  width: 28%;
+  margin: 20px;
+  
+}
+
+.item:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.text-elements {
+  padding: 5px; 
+}
+
+h3 {
+  text-transform: uppercase;
+  padding-right: 50px;
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+p {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #626666;
+}
+
+.description {
+  min-height: 65px;
+}
+
+
+img {
+  size: cover;
+  width: 100%;
+}
+
+.price {
+  float:right;
+  margin-top: -40px;
+  padding: 5px;
+  margin-right: 3px;
+  font-size: 20px;
+  background-color: #232323;
+  border-radius: 10px;
+  color: #E5E5E5;
+}
+
+
+#coursebar, #foodbar, #allergybar {
+  text-align: center;
+
+}
+
+ul {
+  padding-left: 0;
+
+}
+
+li {
+  list-style-type: none;
+  display: inline;
+  vertical-align: center;
+  padding: 5px;
+  background: #626666;
+  text-transform: uppercase;
+  margin: 5px;
+  border-radius: 1.5px;
+  color: #E5E5E5;
+
+}
+
+li:hover, .selected {
+  background: #E5E5E5;
+  color: #000;
+}
+
+.remove {
+  background: #F95759;
+  display: none;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #E5E5E5;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 0px;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.inject-content {
+  margin-top: -10px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    position: absolute;
+    right: 11%;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.hidden-content {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .item { display: inline-block; width: 90%; }
+  body { width: 100%; background-size: auto; }
+}
+
+</style>
+
+</head>
+
+<body>
+  <div class="strip">
+    <h1>esha's restaurant</h1>
+    <h2>A New York City eatery</h2>
+  </div>
+<div class="selector">
+  <div id="coursebar">
+      <ul>
+        <i class="fa fa-filter"></i>
+        <li class="toggle">Starter</li>
+        <li class="toggle">Main</li>
+        <li class="toggle">Dessert</li>
+        <li class="remove">Remove</li>
+      </ul>
+
+  </div>
+  <div id="foodbar">
+      <ul>
+        <i class="fa fa-filter"></i>
+        <li class="toggle">Chicken</li>
+        <li class="toggle">Pork</li>
+        <li class="toggle">Veggie</li>
+        <li class="toggle">Pasta</li>
+        <li class="toggle">Pizza</li>
+      </ul>
+  </div>
+
+  <div id="allergybar">
+      <ul>
+        <i class="fa fa-filter"></i>
+        <li class="toggle">Gluten</li>
+        <li class="toggle">Nuts</li>
+        <li class="toggle">Soya</li>
+        <li class="toggle">Diary</li>
+        <li class="toggle">Wheat</li>
+      </ul>
+  </div>
+</div>
+<section>
+  <div class="item Starter Pasta Wheat">
+    <img src="http://dash.ga.co/assets/firstcourse.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>welsh onion soko</h3><span class="price">$14</span></div>
+      <p class="description">Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+      <div class="hidden-content">
+        <p>Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil. Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+        <p>Ingredients: Tomato, Onion, Garlic, Parsley, Potato, Carrot, Leek</p>
+      </div>
+      <p><span>Starter</span>&nbsp;|&nbsp;<span>Pasta</span>&nbsp;|&nbsp;<span>Wheat</span></p>
+    </div>
+  </div>
+  
+  <div class="item Main Pork Gluten">
+    <img src="http://dash.ga.co/assets/secondcourse.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>pastrami boudin tongue </h3><span class="price">$22</span></div>
+      <p class="description">Tri-tip capicola kielbasa salami brisket chicken rump strip steak drumstick. Meatloaf chuck boudin ribeye pork jowl. Andouille bacon jowl meatloaf pork loin prosciutto bresaola.</p>
+    <div class="hidden-content">
+      <p>Tri-tip capicola kielbasa salami brisket chicken rump strip steak drumstick. Meatloaf chuck boudin ribeye pork jowl. Andouille bacon jowl meatloaf pork loin prosciutto bresaola. Tri-tip capicola kielbasa salami brisket chicken rump strip steak drumstick. Meatloaf chuck boudin ribeye pork jowl. Andouille bacon jowl meatloaf pork loin prosciutto bresaola.</p>
+      <p>Ingredients: Pastrami, Tomato, Onion, Garlic, Lemon, Bread, Lettuce</p>
+    </div>
+      <p><span>Main</span>&nbsp;|&nbsp;<span>Pork</span>&nbsp;|&nbsp;<span>Gluten</span></p>
+    </div>
+  </div>
+  
+  
+<div class="item Dessert Wheat Nuts">
+    <img src="http://dash.ga.co/assets/dessertcourse.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>fruitcake marzipan</h3><span class="price">$8</span></div>
+      <p class="description">Lollipop tart cotton candy jelly-o carrot cake apple pie cupcake. Jelly-o bear claw ice cream candy canes.</p>
+    <div class="hidden-content">
+      <p>Lollipop tart cotton candy jelly-o carrot cake apple pie cupcake. Jelly-o bear claw ice cream candy canes. Lollipop tart cotton candy jelly-o carrot cake apple pie cupcake. Jelly-o bear claw ice cream candy canes.</p>
+      <p>Ingredients: Fruit (Berries, Raspberries, Orange), Chocolate, Cream, Sponge</p>
+    </div>
+      <p><span>Dessert</span>&nbsp;|&nbsp;<span>Wheat</span>&nbsp;|&nbsp;<span>Nuts</span></p>
+    </div>
+  </div>
+
+<div class="item Dessert Dairy Fruit">
+    <img src="https://i.imgur.com/QK0blS4.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>Chocolate Tart</h3><span class="price">$10</span></div>
+      <p class="description">Lollipop tart cotton candy jelly-o carrot cake apple pie cupcake. Jelly-o bear claw ice cream candy canes.</p>
+    <div class="hidden-content">
+      <p>Lollipop tart cotton candy jelly-o carrot cake apple pie cupcake. Jelly-o bear claw ice cream candy canes. Lollipop tart cotton candy jelly-o carrot cake apple pie cupcake. Jelly-o bear claw ice cream candy canes.</p>
+      <p>Ingredients: Stawberries, Chocolate, Cream, Sponge</p>
+    </div>
+      <p><span>Dessert</span>&nbsp;|&nbsp;<span>Diary</span>&nbsp;|&nbsp;<span>Fruit</span></p>
+    </div>
+  </div>
+
+<div class="item Nuts Starter Veggie ">
+    <img src="https://i.imgur.com/J9AbeAy.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>tomato and feta salad </h3><span class="price">$7</span></div>
+      <p class="description">Tri-tip capicola kielbasa salami brisket chicken rump strip steak drumstick. Meatloaf chuck boudin ribeye pork jowl. Andouille bacon jowl meatloaf pork loin prosciutto bresaola.</p>
+    <div class="hidden-content">
+      <p>Tri-tip capicola kielbasa salami brisket chicken rump strip steak drumstick. Meatloaf chuck boudin ribeye pork jowl. Andouille bacon jowl meatloaf pork loin prosciutto bresaola. Tri-tip capicola kielbasa salami brisket chicken rump strip steak drumstick. Meatloaf chuck boudin ribeye pork jowl. Andouille bacon jowl meatloaf pork loin prosciutto bresaola.</p>
+      <p>Ingredients:, Tomato, Feta, Onion, Garlic, Lemon, Olive Oil, Lettuce</p>
+    </div>
+      <p><span>Starter</span>&nbsp;|&nbsp;<span>Veggie</span>&nbsp;|&nbsp;<span>Nuts</span></p>
+    </div>
+  </div>
+  
+<div class="item Main Fish Gluten">
+    <img src="https://i.imgur.com/oZ1gJXQr.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>Salmon & Roasted Veg</h3><span class="price">$24</span></div>
+      <p class="description">Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+      <div class="hidden-content">
+        <p>Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil. Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+        <p>Ingredients: Salmon, Tomato, Pepper, Courgette, Onion, Garlic, Parsley, Potato</p>
+      </div>
+      <p><span>Main</span>&nbsp;|&nbsp;<span>Fish</span>&nbsp;|&nbsp;<span>Gluten</span></p>
+    </div>
+  </div>
+
+ 
+  <div class="item Starter Salad Chicken">
+    <img src="https://i.imgur.com/VuScGHp.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>Pomegranate & Chicken Salad</h3><span class="price">$11</span></div>
+      <p class="description">Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+      <div class="hidden-content">
+        <p>Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil. Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+        <p>Ingredients: Chicken, Pomegranate, Spinach, Garlic, Parsley, Olive Oil</p>
+      </div>
+      <p><span>Starter</span>&nbsp;|&nbsp;<span>Salad</span>&nbsp;|&nbsp;<span>Chicken</span></p>
+    </div>
+  </div>
+
+  <div class="item Main Pasta Wheat">
+    <img src="https://i.imgur.com/U5IG2fj.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>Spaghetti Bolognese</h3><span class="price">$18</span></div>
+      <p class="description">Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+      <div class="hidden-content">
+        <p>Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil. Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+        <p>Ingredients: Beef, Tomatos, Onion, Garlic, Parsley, Spaghetti, Basil</p>
+      </div>
+      <p><span>Main</span>&nbsp;|&nbsp;<span>Pasta</span>&nbsp;|&nbsp;<span>Wheat</span></p>
+    </div>
+  </div>
+
+  <div class="item Dessert Fruit Dairy">
+    <img src="https://i.imgur.com/oFTQp8f.jpg">
+    <div class="text-elements">
+      <div class="title"><h3>Summerfruits Pastry</h3><span class="price">$9</span></div>
+      <p class="description">Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+      <div class="hidden-content">
+        <p>Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil. Mustard sierra leone bologi kale chard beet greens black-eyed pea sorrel amaranth garlic tigernut spring onion summer purslane asparagus lentil.</p>
+        <p>Ingredients: Chicken, Tomato, Onion, Garlic, Parsley, Potato</p>
+      </div>
+      <p><span>Main</span>&nbsp;|&nbsp;<span>Fruit</span>&nbsp;|&nbsp;<span>Dairy</span></p>
+    </div>
+  </div>
+
+</section>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="inject-content"></div>
+  </div>
+
+</div>
+
+<script>
+
+    $(".toggle").click(function() {
+       
+       $(".item").hide();
+       $(".remove").show();
+       $(".selected").removeClass("selected");
+       $(this).toggleClass("selected");
+
+       var itemSelected = $(this).html();
+       var dot = "."
+       $("."+itemSelected).toggle();
+
+    });
+
+    $(".remove").click(function() {
+       
+       $(".selected").removeClass("selected");
+       $(".item").show();
+       $(".remove").hide();
+       
+    });
+
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // When the user clicks on the button, open the modal 
+    $(".item").click(function() {
+        
+
+        var content = $(this).html();
+        $("#inject-content").html(content);
+        $("#inject-content .hidden-content").show();
+        $("#inject-content .description").css("min-height", 0)
+        modal.style.display = "block";
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    $(".close").click(function() {
+        $(".hidden-content").hide();
+        $(".description").css("min-height", 65+"px")
+        modal.style.display = "none";
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            $(".hidden-content").hide();
+            $(".description").css("min-height", 65+"px")
+            modal.style.display = "none";
+        }
+}
+</script>
+
+</body>
+
